@@ -1,6 +1,6 @@
-/target/
-/dist/
-/node_modules/
-*.pkg.tar.zst
-/pkgbuilds/*/src/
-/pkgbuilds/*/pkg/
+__pycache__/
+*.py[cod]
+*.log
+test-results/
+node_modules/
+adapters/claude-mod/.claude-plugin/types/

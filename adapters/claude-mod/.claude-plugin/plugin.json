@@ -1,0 +1,7 @@
+{
+  "name": "agent-sponsors-demo",
+  "version": "0.0.2",
+  "description": "Opt-in local sponsor preview beside the Claude Code spinner. No ads or earnings.",
+  "author": { "name": "Tom Ballard" },
+  "license": "MIT"
+}

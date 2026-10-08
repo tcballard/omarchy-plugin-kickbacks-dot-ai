@@ -1,0 +1,32 @@
+#!/usr/bin/env node
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { spawn } from 'node:child_process';
+import { claudeArgs, runTmux, ROOT } from '../adapters/launch.mjs';
+const [mode,agent,...tail]=process.argv.slice(2);
+try {
+  if(mode!=='demo' || !['claude','codex'].includes(agent)) throw new Error('Usage: agent-sponsors demo claude|codex [--statusline|--terminal|--fixture] [-- AGENT_ARGS...]\nDemo only. Kickbacks payouts are not connected.');
+  let terminal=agent==='codex',fixture=false,statusline=false,args=[];
+  for(let i=0;i<tail.length;i++) {
+    if(tail[i]==='--'){args=tail.slice(i+1);break;}
+    if(tail[i]==='--statusline') { if(agent!=='claude') throw new Error('--statusline is Claude-only'); statusline=true; }
+    else if(tail[i]==='--terminal') terminal=true;
+    else if(tail[i]==='--fixture') {terminal=true;fixture=true;}
+    else throw new Error('Agent arguments must follow --');
+  }
+  if(fixture && args.length) throw new Error('Fixture does not accept agent arguments.');
+  if(terminal) process.exit(runTmux(agent,args,{fixture}));
+  if(!process.stdin.isTTY || !process.stdout.isTTY) throw new Error('Run this launcher in an interactive terminal.');
+  const argv=statusline ? claudeArgs(args) : ['--plugin-dir',path.join(ROOT,'adapters/claude-mod'),...args];
+  const dir=fs.mkdtempSync(path.join(os.tmpdir(),'agent-sponsors-'));fs.chmodSync(dir,0o700);
+  const pause=path.join(dir,'paused');
+  console.error(statusline ? 'Demo status line; overrides existing status line for this session. No earnings.' : 'Native spinner demo: requires Claude 2.1.287+. Run /sponsors inside Claude to enable. No earnings.');
+  if(statusline) console.error(`Pause from another terminal: touch ${JSON.stringify(pause)}; resume: rm ${JSON.stringify(pause)}`);
+  const child=spawn('claude',argv,{stdio:'inherit',env:{...process.env,AGENT_SPONSORS_DEMO:'1',AGENT_SPONSORS_PAUSE_FILE:pause}});
+  const cleanup=()=>fs.rmSync(dir,{recursive:true,force:true});
+  process.on('SIGINT',()=>{});
+  process.on('SIGTERM',()=>child.kill('SIGTERM'));
+  child.on('error',e=>{cleanup();console.error(e.message);process.exit(127);});
+  child.on('exit',(code,signal)=>{cleanup();process.exit(code??(signal==='SIGINT'?130:143));});
+} catch(e) { console.error(e.message);process.exit(2); }
