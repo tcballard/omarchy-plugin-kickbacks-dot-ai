@@ -9,7 +9,7 @@ async function until(fn){for(let i=0;i<50;i++){if(fn())return;await new Promise(
 try {
  tmux(['new-session','-d','-s','agent','-x','80','-y','24',plan.command]);
  await until(()=>tmux(['capture-pane','-p','-t','agent']).includes('fixture>'));
- assert.match(tmux(['show-options','-v','status-left']),/DEMO.*No earnings/);
+ assert.match(tmux(['show-options','-A','-v','-t','agent','status-left']),/DEMO.*No earnings/);
  tmux(['send-keys','-t','agent','hello','Enter']);
  await until(()=>tmux(['capture-pane','-p','-t','agent']).includes('Input received (5 characters)'));
  tmux(['resize-window','-t','agent','-x','100','-y','30']);
