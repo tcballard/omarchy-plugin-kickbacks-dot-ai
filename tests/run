@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
-cd "$(dirname "$0")/.."
-node scripts/check.mjs
-node --test tests/*.test.mjs
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+node "$root/scripts/check.mjs"
+python3 "$root/scripts/validate_manifest.py" "$root"
+node --test "$root"/tests/*.test.mjs
+bash -n "$root/demo/run"
+"$root/demo/run" claude
+"$root/demo/run" codex
+if command -v omarchy >/dev/null 2>&1; then
+  omarchy plugin validate "$root"
+fi

@@ -18,3 +18,5 @@ jobs:
         with:
           node-version: "22"
       - run: ./tests/run
+      - run: sudo apt-get update && sudo apt-get install -y tmux
+      - run: node tests/tmux-smoke.mjs

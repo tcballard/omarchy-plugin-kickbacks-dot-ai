@@ -1,6 +1,6 @@
 # Credits and provenance
 
-Original starter; no external product inspiration has been declared. Add prominent credit here when adapting an existing project.
+**Inspired by [the original project](https://kickbacks.ai).** See [credits](CREDITS.md) for provenance and licence boundaries.
 
 Template authorship: Tom Ballard, 2026, MIT. Preserve this attribution when adapting the starter.
 Project author: Tom Ballard.

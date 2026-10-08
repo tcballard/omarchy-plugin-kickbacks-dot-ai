@@ -1,9 +1,14 @@
 # Architecture
 
-StarterWidget.qml owns a per-instance, in-memory toggle. It uses the host BarWidget and WidgetButton APIs and follows the host bar orientation. The manifest declares only the implemented bar-widget kind.
+Panel.qml is a hosted Omarchy panel. lib/Sponsors.js holds the in-memory demo state; closing clears the simulated wait. No provider is connected and balances remain unknown. No panel state is persisted.
 
-No files, network requests, background processes, global configuration or installation hooks are used. Destroying the widget releases its state. Keep process-wide work in an explicit service if the feature later needs one, and document ownership and shutdown before adding it.
+The independent Claude mod under adapters/claude-mod registers /sponsors and adds labelled demo text to the Spinner render hook after session consent. It makes no network calls and does not read prompts. The status-line adapter is an alternative session-only configuration.
 
-The starter only renders fixed symbols and fixed tooltip strings. For external text, use explicit Text.PlainText content items, including nested delegates and preview buttons. Do not rely on Qt AutoText.
+The Codex launcher owns a private tmux server, footer and temporary directory; the actual CLI runs unchanged in its pane. Cleanup stops only that server. Node 18+ and tmux 3.4+ are launcher dependencies; the native Claude mod needs neither.
 
-Node is a development dependency for portable checks; it is not used by the runtime widget. Workbench registration and command trust remain explicit user actions.
+See [embedding contracts and evidence](docs/EMBEDDING.md) and [design](docs/DESIGN.md). No VS Code integration, payout service or background daemon is implemented.
+
+The accepted target is a standalone Kickbacks.ai provider helper shared by Omarchy
+controls and both CLI adapters. This is planned, not implemented. The provider
+contract and licensing requirements are recorded in
+[the integration brief](docs/KICKBACKS-INTEGRATION.md).

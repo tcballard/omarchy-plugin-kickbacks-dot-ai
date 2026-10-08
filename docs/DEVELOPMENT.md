@@ -1,11 +1,7 @@
-# Develop and test the plugin
+# Development
 
-Initialize first, then run `./tests/run`. On the target Omarchy machine run `omarchy plugin validate .` and record `omarchy-version`. Portable checks validate a deliberately narrow structural subset; the installed host's validator is authoritative.
+Run ./tests/run for portable checks, then node tests/tmux-smoke.mjs on Linux with tmux 3.4+. See [EMBEDDING.md](EMBEDDING.md) for CLI commands and [VALIDATION.md](VALIDATION.md) for evidence.
 
-The example is a stateless bar toggle. Test horizontal and vertical bars, disable/re-enable, reload, monitor changes and theme changes. No persistent settings are claimed.
+On Omarchy, run omarchy plugin validate . and record omarchy-version. Exercise panel open/close, consent, agent selection, simulated wait, pause, reload, monitor changes and theme changes. Record actual desktop evidence in ACCEPTANCE.json; portable tests do not establish live acceptance.
 
-Use your current Omarchy plugin development/linking workflow or Plugin Workbench after inspecting its current commands. The included `.omarchy-workbench.json` proposes checks; it does not grant trust or execute them automatically.
-
-Before a public release, document the exact verified install command for this repository and the installed host version. This starter has no published marketplace listing. Disable it using the host's plugin manager before removing the linked/installed copy. It does not modify Hyprland settings or create user data.
-
-For richer surfaces, use the current Build Omarchy Plugins generator to select panel, overlay, menu or service contracts. Do not declare extra kinds until their entry points exist.
+The README contains install/removal commands. Workbench commands require explicit trust. No persistent account data or helper service is created. Native backend work should use Rust once the provider contract is available.
