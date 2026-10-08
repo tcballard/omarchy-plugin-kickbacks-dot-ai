@@ -2,9 +2,12 @@
 
 [![Built for Omarchy: Plugin](https://raw.githubusercontent.com/tcballard/omarchy-badges/75975e5b5bf75e7ede3764bcd2950046f7abfe2c/badges/v1/omarchy-plugin.svg)](https://github.com/tcballard/omarchy-badges)
 
-An Omarchy prototype for optional sponsorship in Claude Code and Codex terminals.
+An Omarchy integration project targeting real Kickbacks.ai sponsorship inside Claude Code and Codex terminal CLIs, without a running editor.
 **Embedding preview: native Claude spinner mod plus a Codex terminal wrapper. No live ads, account connection or earnings.**
-**Inspired by [Kickbacks.ai](https://kickbacks.ai).** See [credits](CREDITS.md).
+**Target provider: [Kickbacks.ai](https://kickbacks.ai).** See [credits](CREDITS.md).
+The standalone publisher integration is blocked on a supported provider contract;
+Codex CLI earning is currently unsupported by Kickbacks. See the
+[integration scope and maintainer request](docs/KICKBACKS-INTEGRATION.md).
 Independent project; not affiliated with Kickbacks, Anthropic or OpenAI.
 
 ## Try native Claude embedding

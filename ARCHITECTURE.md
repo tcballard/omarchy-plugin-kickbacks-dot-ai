@@ -7,3 +7,8 @@ The independent Claude mod under adapters/claude-mod registers /sponsors and add
 The Codex launcher owns a private tmux server, footer and temporary directory; the actual CLI runs unchanged in its pane. Cleanup stops only that server. Node 18+ and tmux 3.4+ are launcher dependencies; the native Claude mod needs neither.
 
 See [embedding contracts and evidence](docs/EMBEDDING.md) and [design](docs/DESIGN.md). No VS Code integration, payout service or background daemon is implemented.
+
+The accepted target is a standalone Kickbacks.ai provider helper shared by Omarchy
+controls and both CLI adapters. This is planned, not implemented. The provider
+contract and licensing requirements are recorded in
+[the integration brief](docs/KICKBACKS-INTEGRATION.md).

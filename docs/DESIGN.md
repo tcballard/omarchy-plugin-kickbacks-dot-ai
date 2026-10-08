@@ -81,3 +81,12 @@ and terminal-session controls are independent in this preview.
 
 Remote CI, tmux live behavior and authenticated GUI rendering remain unverified.
 Feature branch: feature/terminal-embedding; no release or marketplace submission.
+
+## 8 October: confirmed product scope
+
+The goal is a real standalone Kickbacks.ai integration for Omarchy, Claude Code
+and Codex terminal CLIs. The local embedding preview is an intermediate experiment,
+not the requested outcome. See [provider integration](KICKBACKS-INTEGRATION.md)
+for verified provider constraints, the prepared maintainer request and acceptance
+criteria. The repository is now public with draft PR #4 on
+feature/terminal-embedding; earlier private-scaffold wording is historical.
